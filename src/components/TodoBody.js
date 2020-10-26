@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import TodoItem from './TodoItem';
+import { useTodoState } from './TodoContext';
+import TodoList from './TodoList';
 
 const TodoBodyBox = styled.div`
   flex: 1;
@@ -9,12 +11,18 @@ const TodoBodyBox = styled.div`
 `;
 
 function TodoBody() {
+  const TodoList = useTodoState();
+  console.log(TodoList);  //<TodoItem text="프로젝트 생성1" done={true} />
   return (
   <TodoBodyBox>
-    <TodoItem text="프로젝트 생성1" done={true} />
-    <TodoItem text="프로젝트 생성2" done={true} />
-    <TodoItem text="프로젝트 생성3" done={false} />
-    <TodoItem text="프로젝트 생성4" done={false} />
+   {TodoList.map(todo => 
+      <TodoItem 
+        key={todo.id} 
+        id={todo.id}
+        text={todo.text} 
+        done={todo.done} 
+      />
+   )}
   </TodoBodyBox>
   );
 }
